@@ -19,12 +19,16 @@
     </form>
 </body>
 <script>
-    $(document).ready(function(){
-        console.log('ready');
-    })
     function onOfficeSubmit(event){
         event.preventDefault();
-        console.log($(this).serializeArray());
+        const valuesInArray = $(this).serializeArray();
+
+        const body = {}
+        valuesInArray.forEach(e=>{
+            body[e.name] = e.value;
+        })
+        console.log(valuesInArray);
+        console.log(body);
     }
     function onEmployeeSubmit(){}
     $("#officeForm").submit(onOfficeSubmit)
