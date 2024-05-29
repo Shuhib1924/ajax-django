@@ -9,11 +9,13 @@
 <body>
     <form action="#" id="officeForm">
         <h1>OFFICE Form</h1>
+        {% csrf_token %}
         {{officeForm.as_p}}
         <input type="submit" value="save office">
     </form>
-     <form action="javascript:void(0)" id="employeeForm">
+    <form action="javascript:void(0)" id="employeeForm">
         <h1>EMPLOYEE Form</h1>
+        {% csrf_token %}
         {{employeeForm.as_p}}
         <input type="submit" value="save Employee">
     </form>
@@ -24,11 +26,24 @@
         const valuesInArray = $(this).serializeArray();
 
         const body = {}
-        valuesInArray.forEach(e=>{
+        // valuesInArray.forEach(e=>{
+        //     body[e.name] = e.value;
+        // })
+        valuesInArray.reduce((body, e)=>{
             body[e.name] = e.value;
+            return body
+        }, body);
+        $.ajax({
+            method: "POST",
+            url: "office",
+            data: body
+        }).done(function(response){
+            console.log(response)
+        }).fail(function(response){
+            console.log(response)
         })
-        console.log(valuesInArray);
-        console.log(body);
+        //console.log(valuesInArray);
+        // console.log(body);
     }
     function onEmployeeSubmit(){}
     $("#officeForm").submit(onOfficeSubmit)
