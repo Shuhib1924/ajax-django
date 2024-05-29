@@ -22,7 +22,10 @@
     $(document).ready(function(){
         console.log('ready');
     })
-    function onOfficeSubmit(){}
+    function onOfficeSubmit(event){
+        event.preventDefault();
+        console.log($(this).serializeArray());
+    }
     function onEmployeeSubmit(){}
     $("#officeForm").submit(onOfficeSubmit)
     $("#employeeForm").submit(onEmployeeSubmit)
