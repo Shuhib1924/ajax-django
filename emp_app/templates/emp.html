@@ -7,13 +7,13 @@
     <script src="https://www.unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <body>
-    <form action="javascript:void(0)">
+    <form action="javascript:void(0)" id="officeForm">
         {% csrf_token %}
         <h1>OFFICE Form</h1>
         {{officeForm.as_p}}
         <input type="submit" value="save office">
     </form>
-     <form action="javascript:void(0)">
+     <form action="javascript:void(0)" id="employeeForm">
         {% csrf_token %}
         <h1>EMPLOYEE Form</h1>
         {{employeeForm.as_p}}
@@ -21,6 +21,12 @@
     </form>
 </body>
 <script>
-
+    $(document).ready(function(){
+        console.log('ready');
+    })
+    function onOfficeSubmit(){}
+    function onEmployeeSubmit(){}
+    $("#officeForm").submit(onOfficeSubmit)
+    $("#employeeForm").submit(onEmployeeSubmit)
 </script>
 </html>
