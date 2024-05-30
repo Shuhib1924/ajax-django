@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from FINAL.emp_project.emp_project.emp_app.views import getAllOffices
 from .models import Employee, Office, OfficeForm, EmployeeForm
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
+from django.core import serializers
 def emp(request):
     officeForm = OfficeForm()
     employeeForm = EmployeeForm()
@@ -27,3 +27,7 @@ def employeeCRUD(request):
     return JsonResponse(model_to_dict(employee), safe=False)
 
 
+def getAllOffices(request):
+    offices = Office.objects.all()
+    data = serializers.serialize("json" , offices)
+    return JsonResponse( data , safe=False)

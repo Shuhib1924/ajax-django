@@ -68,6 +68,12 @@
         </div>
     </body>
     <script>
+        $(document).ready(function () {
+            getAllOffices();
+        })
+        function getAllOffices() {
+            console.log('test');
+        }
         function onOfficeSubmit(event) {
             event.preventDefault();
             const valuesInArray = $(this).serializeArray();
