@@ -1,75 +1,123 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://www.unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
-</head>
-<body>
-    <form action="#" id="officeForm">
-        <h1>OFFICE Form</h1>
-        {% csrf_token %}
-        {{officeForm.as_p}}
-        <input type="submit" value="save office">
-    </form>
-    <form action="javascript:void(0)" id="employeeForm">
-        <h1>EMPLOYEE Form</h1>
-        {% csrf_token %}
-        {{employeeForm.as_p}}
-        <input type="submit" value="save Employee">
-    </form>
-</body>
-<script>
-    function onOfficeSubmit(event){
-        event.preventDefault();
-        const valuesInArray = $(this).serializeArray();
 
-        const body = {}
-        // valuesInArray.forEach(e=>{
-        //     body[e.name] = e.value;
-        // })
-        valuesInArray.reduce((body, e)=>{
-            body[e.name] = e.value;
-            return body
-        }, body);
-        $.ajax({
-            method: "POST",
-            url: "office",
-            data: body
-        }).done(function(response){
-            console.log(response);
-            event.target.reset();
-            console.log('office saved');
-        }).fail(function(response){
-            console.log(response)
-        })
-        //console.log(valuesInArray);
-        // console.log(body);
-    }
-    function onEmployeeSubmit(){
-        event.preventDefault();
-        const employeeFormValueArray = $(this).serializeArray();
-        const body = {}
-        employeeFormValueArray.forEach(element=>{
-            body[element.name]=element.value;
-        })
-        console.log("employeeFormValueArray", employeeFormValueArray);
-        console.log("body", body);
-        $.ajax({
-            method: "POST",
-            url: "employee",
-            data: body
-        }).done(function(response){
-            console.log(response);
-            event.target.reset();
-            console.log('employee saved');
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <title>Document</title>
+        <script src="https://www.unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+            integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+            crossorigin="anonymous"
+        >
+        <script
+            src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"
+        ></script>
+    </head>
 
-        }).fail(function(response){
-            console.log(response)
-        })
-    }
-    $("#officeForm").submit(onOfficeSubmit)
-    $("#employeeForm").submit(onEmployeeSubmit)
-</script>
+    <body>
+        <div class="mt-4 container">
+            <div>
+                <div class="m-4 p-4 border rounded col-lg-5">
+                    <form
+                        action="#"
+                        id="officeForm"
+                    >
+                        <h1>OFFICE Form</h1>
+                        {% csrf_token %}
+                        {{officeForm|crispy}}
+                        <input
+                            class="btn btn-success"
+                            type="submit"
+                            value="save office"
+                        >
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <div class="m-4 p-4 border rounded col-lg-5">
+                    <form
+                        action="javascript:void(0)"
+                        id="employeeForm"
+                    >
+                        <h1>EMPLOYEE Form</h1>
+                        {% csrf_token %}
+                        {{employeeForm|crispy}}
+                        <input
+                            class="btn btn-info"
+                            type="submit"
+                            value="save Employee"
+                        >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function onOfficeSubmit(event) {
+            event.preventDefault();
+            const valuesInArray = $(this).serializeArray();
+
+            const body = {}
+            // valuesInArray.forEach(e=>{
+            //     body[e.name] = e.value;
+            // })
+            valuesInArray.reduce((body, e) => {
+                body[e.name] = e.value;
+                return body
+            }, body);
+            $.ajax({
+                method: "POST",
+                url: "office",
+                data: body
+            }).done(function (response) {
+                console.log(response);
+                event.target.reset();
+                console.log('office saved');
+            }).fail(function (response) {
+                console.log(response)
+            })
+            //console.log(valuesInArray);
+            // console.log(body);
+        }
+        function onEmployeeSubmit() {
+            event.preventDefault();
+            const employeeFormValueArray = $(this).serializeArray();
+            const body = {}
+            employeeFormValueArray.forEach(element => {
+                body[element.name] = element.value;
+            })
+            console.log("employeeFormValueArray", employeeFormValueArray);
+            console.log("body", body);
+            $.ajax({
+                method: "POST",
+                url: "employee",
+                data: body
+            }).done(function (response) {
+                console.log(response);
+                event.target.reset();
+                console.log('employee saved');
+
+            }).fail(function (response) {
+                console.log(response)
+            })
+        }
+        $("#officeForm").submit(onOfficeSubmit)
+        $("#employeeForm").submit(onEmployeeSubmit)
+    </script>
+
 </html>

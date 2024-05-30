@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.emp, name='emp'),
     path('office', views.officeCRUD, name='office'),
     path('employee', views.employeeCRUD, name='employee'),
+    path('offices', views.getAllOffices, name='allOffices'),
 ]
 
