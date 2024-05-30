@@ -40,6 +40,7 @@
         }).done(function(response){
             console.log(response);
             event.target.reset();
+            console.log('office saved');
         }).fail(function(response){
             console.log(response)
         })
@@ -55,6 +56,18 @@
         })
         console.log("employeeFormValueArray", employeeFormValueArray);
         console.log("body", body);
+        $.ajax({
+            method: "POST",
+            url: "employee",
+            data: body
+        }).done(function(response){
+            console.log(response);
+            event.target.reset();
+            console.log('employee saved');
+
+        }).fail(function(response){
+            console.log(response)
+        })
     }
     $("#officeForm").submit(onOfficeSubmit)
     $("#employeeForm").submit(onEmployeeSubmit)

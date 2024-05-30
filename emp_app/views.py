@@ -17,3 +17,10 @@ def officeCRUD(request):
         officeForm = OfficeForm(request.POST)
         office = officeForm.save()
     return JsonResponse(model_to_dict(office), safe=False)
+
+def employeeCRUD(request):
+    if request.method == "POST":
+        print(request.POST)
+        employeeForm = EmployeeForm(request.POST)
+        employee = employeeForm.save()
+    return JsonResponse(model_to_dict(employee), safe=False)
