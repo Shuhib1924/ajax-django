@@ -38,7 +38,8 @@
             url: "office",
             data: body
         }).done(function(response){
-            console.log(response)
+            console.log(response);
+            event.target.reset();
         }).fail(function(response){
             console.log(response)
         })
