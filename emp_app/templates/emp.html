@@ -68,6 +68,7 @@
         </div>
     </body>
     <script>
+        var officeList = [];
         $(document).ready(function () {
             getAllOffices();
         })
@@ -77,11 +78,16 @@
                 method: "GET",
                 url: "offices"
             }).done(function (response) {
-                const offices = JSON.parse(response)
-                console.log(offices)
+                const tempOffices = JSON.parse(response)
+                officeList = tempOffices
+                // console.log(tempOffices)
+                renderOfficeTable()
             }).fail(function (response) {
                 console.log(response)
             })
+        }
+        function renderOfficeTable() {
+            console.log('rendered table', officeList);
         }
         function onOfficeSubmit(event) {
             event.preventDefault();
