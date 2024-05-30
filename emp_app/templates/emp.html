@@ -47,7 +47,10 @@
                     </form>
                 </div>
                 <div class="col-5">
-                    <table class="table">
+                    <table
+                        class="table"
+                        id="officeTable"
+                    >
                         <thread>
                             <tr>
                                 <th>name</th>
@@ -94,6 +97,7 @@
             }).done(function (response) {
                 const tempOffices = JSON.parse(response)
                 officeList = tempOffices
+                officeList.map(e => e.fields)
                 // console.log(tempOffices)
                 renderOfficeTable()
             }).fail(function (response) {
@@ -102,11 +106,17 @@
         }
         function renderOfficeTable() {
             // console.log('rendered table', officeList);
-            const tableBody = document.getElementById("officeTableID");
+            let tableBody = document.getElementById("officeTableID");
+            tableBody.remove();
+
+            let newBody = document.createElement("tbody");
+            newBody.id = "officeTableID";
+            document.getElementById("officeTable").append(newBody);
+
             officeList.forEach(function (office, index) {
-                console.log(office.fields);
-                office = office.fields;
-                const row = tableBody.insertRow();
+                //console.log(office.fields);
+                //office = office.fields;
+                const row = newBody.insertRow();
                 const count = document.createElement("TD");
                 count.innerHTML = index + 1;
                 const name = document.createElement("TD");
@@ -137,7 +147,10 @@
             }).done(function (response) {
                 console.log(response);
                 event.target.reset();
+                officeList.push(response)
+                console.log(officeList)
                 console.log('office saved');
+                renderOfficeTable();
             }).fail(function (response) {
                 console.log(response)
             })
