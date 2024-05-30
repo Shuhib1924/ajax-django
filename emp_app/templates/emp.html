@@ -87,7 +87,10 @@
             })
         }
         function renderOfficeTable() {
-            console.log('rendered table', officeList);
+            // console.log('rendered table', officeList);
+            officeList.forEach(function (office) {
+                console.log(office);
+            })
         }
         function onOfficeSubmit(event) {
             event.preventDefault();
