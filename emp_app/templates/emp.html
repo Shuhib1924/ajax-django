@@ -30,8 +30,8 @@
 
     <body>
         <div class="mt-4 container">
-            <div>
-                <div class="m-4 p-4 border rounded col-lg-5">
+            <div class="row">
+                <div class="m-4 p-4 border rounded col-5">
                     <form
                         action="#"
                         id="officeForm"
@@ -46,7 +46,21 @@
                         >
                     </form>
                 </div>
+                <div class="col-5">
+                    <table class="table">
+                        <thread>
+                            <tr>
+                                <th>name</th>
+                                <th>location</th>
+                            </tr>
+                        </thread>
+                        <tbody id="officeTableID">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
             <hr>
             <div>
                 <div class="m-4 p-4 border rounded col-lg-5">
@@ -88,8 +102,17 @@
         }
         function renderOfficeTable() {
             // console.log('rendered table', officeList);
+            const tableBody = document.getElementById("officeTableID");
             officeList.forEach(function (office) {
                 console.log(office.fields);
+                office = office.fields;
+                const row = tableBody.insertRow();
+                const name = document.createElement("TD");
+                name.innerHTML = office.name;
+                const location = document.createElement("TD");
+                location.innerHTML = office.location;
+                row.appendChild(name);
+                row.appendChild(location);
             })
         }
         function onOfficeSubmit(event) {
