@@ -77,7 +77,8 @@
                 method: "GET",
                 url: "offices"
             }).done(function (response) {
-                console.log(response)
+                const offices = JSON.parse(response)
+                console.log(offices)
             }).fail(function (response) {
                 console.log(response)
             })
