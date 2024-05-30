@@ -46,7 +46,16 @@
         //console.log(valuesInArray);
         // console.log(body);
     }
-    function onEmployeeSubmit(){}
+    function onEmployeeSubmit(){
+        event.preventDefault();
+        const employeeFormValueArray = $(this).serializeArray();
+        const body = {}
+        employeeFormValueArray.forEach(element=>{
+            body[element.name]=element.value;
+        })
+        console.log("employeeFormValueArray", employeeFormValueArray);
+        console.log("body", body);
+    }
     $("#officeForm").submit(onOfficeSubmit)
     $("#employeeForm").submit(onEmployeeSubmit)
 </script>
