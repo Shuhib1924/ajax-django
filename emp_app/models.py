@@ -6,7 +6,7 @@ class Office(models.Model):
     location = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.location}'
 
 class Employee(models.Model):
     genders = [

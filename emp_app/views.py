@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Employee, Office, OfficeForm, EmployeeForm
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
 def emp(request):
     officeForm = OfficeForm()
     employeeForm = EmployeeForm()
@@ -13,4 +14,6 @@ def emp(request):
 def officeCRUD(request):
     if request.method == "POST":
         print(request.POST)
-    return JsonResponse({"message": "success"})
+        officeForm = OfficeForm(request.POST)
+        office = officeForm.save()
+    return JsonResponse(model_to_dict(office), safe=False)
